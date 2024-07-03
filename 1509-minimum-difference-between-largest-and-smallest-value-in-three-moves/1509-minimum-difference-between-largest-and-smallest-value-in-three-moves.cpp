@@ -11,7 +11,6 @@ public:
             int j=4-i;
             while(j>=0){
                 diff=min(diff,nums[n-i]-nums[j]);
-                cout<<i<<j<<endl;
                 j--;
             }
             
@@ -21,7 +20,4 @@ public:
     }
 };
 
-//0 1 5 8 10 14
-//  1 4 3  2  4
-//20 75 81 82 83 95
-//20 75 81 82 95
+
