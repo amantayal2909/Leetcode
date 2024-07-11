@@ -9,17 +9,16 @@ public:
         for(int i=0 ;i<s.size();i++){
             if(s[i]==')'){
             string ans="";
-            while(st.top()!='('){
+            while(st.top()!='(' ){
                 ans=ans+st.top();
                 st.pop();
             } 
             st.pop();
-            if(st.size()!=0){
+            
                 for(int j=0; j<ans.size();j++)
                     st.push(ans[j]);
-            }        
-            else
-            return ans;    
+                   
+                
             }
             
             else{
@@ -32,6 +31,7 @@ public:
         st.pop();
         }
                   //  st.push(ans[j]);
+        reverse(bns.begin(),bns.end());
         return bns;
     }
 };
