@@ -9,30 +9,56 @@
  * }
  */
 class Solution {
+    // public ListNode deleteDuplicates(ListNode head) {
+    //     if(head == null) return head;
+        
+    //     ListNode curr = head;
+    //     ListNode temp = head;
+
+    //     while(curr!= null  && curr.next != null)
+    //     {
+    //         if( curr.val == curr.next.val){
+    //             curr=curr.next;
+    //         }
+    //         else if( curr.val != curr.next.val ){
+    //             temp.next=curr.next;
+    //             temp= temp.next;
+    //             curr=curr.next;
+
+    //         }
+    //     }
+    //     temp.next = null;
+
+    //     return head;
+
+
+
+
+    // }
+
     public ListNode deleteDuplicates(ListNode head) {
-        if(head == null) return head;
-        ListNode prev = head;
-        ListNode curr = head;
-        ListNode temp = head;
+		//You can code here
 
-        while(curr!= null  && curr.next != null)
-        {
-            if( curr.val == curr.next.val){
-                curr=curr.next;
-            }
-            else if( curr.val != curr.next.val ){
-                temp.next=curr.next;
-                temp= temp.next;
-                curr=curr.next;
+    ListNode curr = head;
+    ListNode dummy = new ListNode(-1);
+    ListNode prev = dummy;
 
-            }
-        }
-        temp.next = null;
-
-        return head;
+    while(curr!= null && curr.next!=null){
+      if(curr.val==curr.next.val){
+        curr= curr.next;
+      }
+      else{
+        prev.next = curr;
+        prev=curr;
+        curr=curr.next;
 
 
+      }
+    }
+    prev.next=curr;
+    return dummy.next;
 
 
+      
     }
 }
