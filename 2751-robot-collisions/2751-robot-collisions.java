@@ -66,9 +66,7 @@ class Solution {
                         }
                         else if(h_stack < h){
                         st.pop();
-                        Data d1 = map.get(x);
-                        int health1 = d1.num;
-                        map.put(x,new Data(health1-1,'L'));
+                        map.put(x,new Data(h-1,'L'));
                         h=h-1;
                         map.remove(x_stack);
 
