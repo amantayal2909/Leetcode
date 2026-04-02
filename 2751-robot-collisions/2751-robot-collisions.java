@@ -1,6 +1,5 @@
 import java.util.*;
-class Solution {
-    public class Data {
+public class Data {
     int num;
     char ch;
 
@@ -9,7 +8,8 @@ class Solution {
         this.ch = ch;
     }
 }
-    public List<Integer> survivedRobotsHealths(int[] pos, int[] hlth, String dir) {
+class Solution {
+    public List<Integer> survivedRobotsHealths_time(int[] pos, int[] hlth, String dir) {
         TreeMap<Integer, Integer> indexes = new TreeMap<>();
 
         HashMap <Integer,Data> map = new HashMap<>();
@@ -59,11 +59,13 @@ class Solution {
                         map.remove(x);
                         break;
                         }
+
                         else if(h_stack > h){
                         map.put(x_stack,new Data(h_stack-1,'R'));
                         map.remove(x);
                         break;
                         }
+
                         else if(h_stack < h){
                         st.pop();
                         map.put(x,new Data(h-1,'L'));
@@ -102,5 +104,54 @@ class Solution {
         }
         
         return ans;
+    }
+    public List<Integer> survivedRobotsHealths(int[] pos, int[] hlth, String dir) {
+        List<Integer> ans = new ArrayList<>();
+        int n = pos.length;
+        Integer index[] = new Integer[n];
+        for(int i=0 ;i<pos.length; i++){
+            index[i]= i;
+        }
+        Arrays.sort(index, (a,b) -> pos[a]-pos[b]);
+
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<index.length;i++){
+            int cur_pos = index[i];
+            if(dir.charAt(cur_pos) == 'R'){
+                st.push(cur_pos);
+            }else{
+                while(!st.empty()){
+                    int top_pos = st.peek();
+                    int top_health = hlth[top_pos];
+                    if(top_health == hlth[cur_pos]){
+                        hlth[cur_pos] =0;
+                        hlth[top_pos] =0;
+                        st.pop();
+                        break;
+
+                    }
+                    else if(top_health > hlth[cur_pos]){
+                        hlth[cur_pos] =0;
+                        hlth[top_pos]--;
+                        break;
+                        
+                    }
+                    else if(top_health < hlth[cur_pos]){
+                        
+                        hlth[top_pos] =0;
+                        hlth[cur_pos]--;
+                        st.pop();
+                    }
+                }
+            }
+
+        }
+        for(int i=0;i<hlth.length ; i++){
+            if(hlth[i]>0){
+                ans.add(hlth[i]);
+            }
+        }
+        return ans;
+
     }
 }
