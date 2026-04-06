@@ -97,9 +97,9 @@ class Robot {
 
         // Special case: full cycle
         if (num == 0) {
-            if (x == 0 && y == 0) {
+            //
                 d = 3; // South
-            }
+            //}
             return;
         }
 
