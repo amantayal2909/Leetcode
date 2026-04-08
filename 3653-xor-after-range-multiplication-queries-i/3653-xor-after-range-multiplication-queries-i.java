@@ -10,7 +10,7 @@ class Solution {
             int v = q[i][3];
 
             for(int j =l; j<=r; j=j+k){
-                nums[j] = (int)(((long)nums[j] * v) % (mod));
+                nums[j] = (((long)nums[j] * v) % (mod));
             }
         }
 
