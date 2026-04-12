@@ -2,7 +2,7 @@ class Solution {
     int[][][] dp;
 
     int dist(int a, int b){
-        if(a == 26 || b == 26) return 0;
+        if(a == 26) return 0;
 
         int r1 = a / 6, c1 = a % 6;
         int r2 = b / 6, c2 = b % 6;
