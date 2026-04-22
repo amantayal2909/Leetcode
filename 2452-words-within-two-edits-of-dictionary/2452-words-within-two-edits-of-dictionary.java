@@ -16,6 +16,7 @@ class Solution {
                     if(a.charAt(k) != b.charAt(k)){
                         diff ++;
                     }
+                    if (diff > 2) break;
                 } 
                 if(diff<=2){
                     ans.add(a);
