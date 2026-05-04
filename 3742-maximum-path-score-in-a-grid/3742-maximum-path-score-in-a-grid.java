@@ -13,10 +13,19 @@ class Solution {
         if(grid[i][j] != 0)
             k_minus--;
 
-        int right = grid[i][j] + solve(grid, i, j+1, m, n, k_minus);
-        int down =  grid[i][j] + solve(grid, i+1, j, m, n, k_minus);
+        int best = Integer.MIN_VALUE;
+        int right = solve(grid, i, j+1, m, n, k_minus); 
+        int down =  solve(grid, i+1, j, m, n, k_minus);
 
-        return dp[i][j][k] = Math.max(right, down);
+        if (right != Integer.MIN_VALUE) {
+            best = Math.max(best, grid[i][j] + right);
+        }
+        if (down != Integer.MIN_VALUE) {
+            best = Math.max(best, grid[i][j] + down);
+        }
+
+        return dp[i][j][k] = best;
+
     }
     public int maxPathScore(int[][] grid, int k) {
         int m = grid.length;
