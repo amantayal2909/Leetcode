@@ -10,29 +10,38 @@
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
-        if(head == null || head.next == null)return head;
-        int l = 0;
-        ListNode curr = head, prev = null;
-        while(curr!= null){
-            l++;
-            prev = curr;
-            curr = curr.next;
+        if(head == null || head.next == null )return head;
+        
+        ListNode curr = head;
+        ListNode prev = null;
+        int length = 0;
+
+        while(curr!=null){
+            length ++;
+            prev=curr;
+            curr=curr.next;
         }
-        int rotate = k % l;
-        rotate = l - rotate;
+        
+        int rotate = k % length;
+        if(rotate == 0)return head;
+        rotate = length - rotate;
+
+        prev.next = head;
 
         curr = head;
-        prev.next = head;
-        ListNode next_n = null;
-        int count = 0;
-        while(count<rotate){
-            next_n = curr;
-            curr = curr.next;
-            count ++;
-        }
+        ListNode temp = null;
 
+        while(rotate>0){
+
+            temp = curr;
+            curr = curr.next;
+            rotate--;
+
+        }
         head = curr;
-        next_n.next = null;
+        temp.next=null;
+
+
         return head;
         
     }
