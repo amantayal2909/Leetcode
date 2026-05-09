@@ -7,7 +7,7 @@ class Solution {
         int right = n-1;
         int top = 0;
         int bottom = m-1;
-        int i =0, j=0, k=0, rotate = 0;
+        int i =0, j=0, k=0, rotation = 0;
         
 
         while(top <= bottom && left <= right){
@@ -19,7 +19,7 @@ class Solution {
             for(i = bottom-1; i>=top+1; i--) sep.add(grid[i][left]);
 
             int length = sep.size();
-            rotate = steps % length;
+            rotation = steps % length;
             
             Collections.rotate(sep, -rotate);
             k = 0;
