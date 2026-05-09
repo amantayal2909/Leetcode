@@ -1,108 +1,60 @@
 class Solution {
-
-    class DisjointSet {
-
-        int[] f;
-
-        public DisjointSet(int m, int n) {
-            f = new int[m * n];
-            for (int i = 0; i < m * n; ++i) {
-                f[i] = i;
-            }
-        }
-
-        public int find(int x) {
-            return x == f[x] ? x : (f[x] = find(f[x]));
-        }
-
-        public void merge(int x, int y) {
-            f[find(x)] = find(y);
-        }
-    }
-
-    int[][] grid;
-    int m;
-    int n;
-    DisjointSet ds;
+    HashMap <Integer, int [][]> map = new HashMap<>();
+    int m, n;
+    boolean visit[][] ;
 
     public boolean hasValidPath(int[][] grid) {
-        this.grid = grid;
+
+        map.put(1, new int[][] {{0,-1},{0,1}});
+        map.put(2, new int[][] {{1,0},{-1,0}});
+        map.put(3, new int[][] {{0,-1},{1,0}});
+        map.put(4, new int[][] {{1,0},{0,1}});
+        map.put(5, new int[][] {{-1,0},{0,-1}});
+        map.put(6, new int[][] {{-1,0},{0,1}});
+
         m = grid.length;
         n = grid[0].length;
-        ds = new DisjointSet(m, n);
-        for (int i = 0; i < m; ++i) {
-            for (int j = 0; j < n; ++j) {
-                handler(i, j);
-            }
-        }
-        return ds.find(getId(0, 0)) == ds.find(getId(m - 1, n - 1));
+
+       visit = new boolean[m][n];
+
+        return dfs_solve(grid, 0, 0);
+        
     }
 
-    public int getId(int x, int y) {
-        return x * n + y;
+    public boolean dfs_solve(int [][] grid , int i, int j){
+
+        if(i == m-1 && j == n-1) return true;
+        visit[i][j] = true;
+
+        int value = grid[i][j];
+        int dir[][] = map.get(value);
+
+        for(int k=0; k<2 ; k++){
+            int newx = i + dir[k][0];
+            int newy = j + dir[k][1];
+
+            if(newx <0 || newx>=m || newy<0 || newy>=n || visit[newx][newy] == true) continue;
+
+            if(next_valid(grid, newx, newy, i, j) == false) continue;
+
+            if(dfs_solve(grid, newx, newy)) return true;
+
+        }
+
+        return false;
     }
 
-    public void detectL(int x, int y) {
-        if (
-            y - 1 >= 0 &&
-            (grid[x][y - 1] == 4 || grid[x][y - 1] == 6 || grid[x][y - 1] == 1)
-        ) {
-            ds.merge(getId(x, y), getId(x, y - 1));
-        }
-    }
+    public boolean next_valid(int [][] grid , int newx, int newy, int i, int j){
+        int value = grid[newx][newy];
+        int dir[][] = map.get(value);
 
-    public void detectR(int x, int y) {
-        if (
-            y + 1 < n &&
-            (grid[x][y + 1] == 3 || grid[x][y + 1] == 5 || grid[x][y + 1] == 1)
-        ) {
-            ds.merge(getId(x, y), getId(x, y + 1));
-        }
-    }
+        for(int k=0; k<2 ; k++){
+            int oldx = newx + dir[k][0];
+            int oldy = newy + dir[k][1];
 
-    public void detectU(int x, int y) {
-        if (
-            x - 1 >= 0 &&
-            (grid[x - 1][y] == 3 || grid[x - 1][y] == 4 || grid[x - 1][y] == 2)
-        ) {
-            ds.merge(getId(x, y), getId(x - 1, y));
-        }
-    }
+            if(oldx == i && oldy == j) return true;
 
-    public void detectD(int x, int y) {
-        if (
-            x + 1 < m &&
-            (grid[x + 1][y] == 5 || grid[x + 1][y] == 6 || grid[x + 1][y] == 2)
-        ) {
-            ds.merge(getId(x, y), getId(x + 1, y));
         }
-    }
-
-    public void handler(int x, int y) {
-        switch (grid[x][y]) {
-            case 1:
-                detectL(x, y);
-                detectR(x, y);
-                break;
-            case 2:
-                detectU(x, y);
-                detectD(x, y);
-                break;
-            case 3:
-                detectL(x, y);
-                detectD(x, y);
-                break;
-            case 4:
-                detectR(x, y);
-                detectD(x, y);
-                break;
-            case 5:
-                detectL(x, y);
-                detectU(x, y);
-                break;
-            case 6:
-                detectR(x, y);
-                detectU(x, y);
-        }
+        return false;
     }
 }
