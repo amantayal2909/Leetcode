@@ -2,21 +2,35 @@ class Solution {
     public int minOperations(int[][] grid, int x) {
         int m = grid.length;
         int n = grid[0].length;
-        List<Integer> list = new ArrayList<>();
-        int rem = grid[0][0] % x, count = 0;
 
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                if(grid[i][j] % x != rem) return -1;
-                list.add(grid[i][j]);
+        int common_rem = grid[0][0] % x;
+
+        List<Integer> arr = new ArrayList<>();
+
+        for(int i=0; i<m; i++){
+            for(int j=0 ; j<n ; j++){
+                int r = grid[i][j] % x;
+                if(r != common_rem) return -1;
+
+                arr.add(grid[i][j]);
             }
         }
-        Collections.sort(list);
-        int mid = m*n/2;
-        for(int num : list){
-            count += Math.abs((list.get(mid) - num) / x);
+
+        Collections.sort(arr);
+        int length = arr.size();
+
+        int mid = length/2;
+
+        int steps = 0;
+        for(int i=0; i<length ; i++){
+            steps += Math.abs(arr.get(i)-arr.get(mid))/x;
         }
 
-        return count;
+
+        return steps;
+
+
+
+
     }
 }
