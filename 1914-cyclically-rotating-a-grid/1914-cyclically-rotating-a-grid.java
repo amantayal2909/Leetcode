@@ -21,7 +21,7 @@ class Solution {
             int length = sep.size();
             rotation = steps % length;
             
-            Collections.rotate(sep, -rotate);
+            Collections.rotate(sep, -rotation);
             k = 0;
 
             for(i = left; i<=right; i++, k++) grid[top][i] = sep.get(k);
