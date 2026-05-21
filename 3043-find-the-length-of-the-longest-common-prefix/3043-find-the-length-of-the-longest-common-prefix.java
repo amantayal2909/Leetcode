@@ -19,10 +19,11 @@ class Solution {
             String s = String.valueOf(num);
 
             // generate all prefixes
-            for (int i = 1; i <= s.length(); i++) {
+            for (int i = s.length(); i >=1 ; i--) {
                 String prefix = s.substring(0, i);
                 if(set.contains(prefix)){
                     ans = Math.max(ans,prefix.length());
+                    break;
                 }
                 
             }
