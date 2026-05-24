@@ -14,7 +14,7 @@ class Solution {
 
             int val = nums[i];
 
-            for(int j=1; j<=val ; j++){
+            for(int j=1; j<=val && (i+j)<=size-1; j++){
                 if((i+j) == size-1)
                     return true;
                 arr[i+j]++;
