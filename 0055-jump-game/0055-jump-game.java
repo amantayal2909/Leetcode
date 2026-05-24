@@ -44,6 +44,6 @@ class Solution {
 
             if(possible>=size-1) return true;
         }
-        return true;
+        return false;
     }
 }
