@@ -12,9 +12,9 @@ class Solution {
         visit[start]= true;
 
         while(!q.isEmpty()){
-            // int qsize = q.size();
+            int qsize = q.size();
 
-            // for(int i=0;i<qsize; i++){
+            for(int i=0;i<qsize; i++){
                 int index = q.poll();
                 int val = nums[index];
 
@@ -37,7 +37,7 @@ class Solution {
                     visit[left_index] = true;
                 }
 
-            //}
+            }
         }
 
         return false;
