@@ -65,6 +65,6 @@ class Solution {
             jump++;
         }
 
-        return jump;
+        return -1;
     }
 }
