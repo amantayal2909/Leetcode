@@ -16,7 +16,7 @@ class Solution {
         while(!q.isEmpty()){
             int qsize = q.size();
 
-            for(int I=0;I<qsize; I++){
+           // for(int I=0;I<qsize; I++){
                 int index = q.poll();
 
                 int min_index = Math.max((index + minJump), farthest+1);
@@ -26,15 +26,15 @@ class Solution {
                 for(int i=min_index; i<=max_index; i++){
                     if(nums.charAt(i) == '0' && i == size-1) return true;
 
-                    if(nums.charAt(i) == '0' ){
+                    if(nums.charAt(i) == '0' && visit[i] == false){
                         q.add(i);
-                        //visit[i] = true;
+                        visit[i] = true;
                     }
                 }
 
                 farthest = Math.max(farthest, max_index);
 
-            }
+            //}
         }
 
         return false;
