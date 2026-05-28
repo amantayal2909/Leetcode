@@ -69,6 +69,9 @@ class Solution {
                 smalllength = length;
                 smallindex = i;
             }
+            else if(smalllength == length){
+                smallindex = Math.min(smallindex, i);
+            }
 
         }
 
