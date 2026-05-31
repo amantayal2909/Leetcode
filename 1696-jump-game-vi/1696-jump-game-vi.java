@@ -70,3 +70,30 @@ class Solution {
 
 
 }
+
+
+/*
+Key Insight 🔑
+dp[j] = nums[j] + max(dp[j-1], dp[j-2], ..., dp[j-k])
+Humein sirf ek sliding window ka maximum chahiye — exactly jo Monotonic Deque best solve karta hai!
+
+Deque kaise kaam karega?
+
+Deque mein hum indices store karenge, aur ensure karenge ki front pe hamesha maximum dp value wala index ho.
+
+3 rules follow karte hain:
+Rule 1 — Window se bahar nikaalo (Front se)
+
+Agar deque.front() index window [j-k, j-1] se bahar chala gaya → pollFirst() karo
+
+Rule 2 — Useless elements nikaalo (Back se)
+
+Naya element add karne se pehle, back se wo sab indices nikalo jinki dp value naye se choti ya equal ho
+(Wo kabhi future mein maximum nahi ban sakte)
+
+Rule 3 — Answer lo aur add karo
+
+dp[j] = nums[j] + dp[deque.front()] → front pe best index hai
+Phir current index j ko back mein daalo
+
+*/
